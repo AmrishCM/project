@@ -1,0 +1,55 @@
+{% extends 'poll/base.html' %}
+
+{% block content %}
+
+<div class="text-center" style="margin-top:60px;">
+    <h3 style="color:#00F6FF; text-shadow:0 0 8px #00F6FF;">VOTER REGISTER</h3>
+</div>
+
+<div class="row">
+    <div class="col mx-auto">
+        <div class="card mx-auto text-center my-5"
+             style="border-radius: 20px; width: 350px; max-width: 90%; padding: 30px;
+                    background: rgba(255,255,255,0.05);
+                    backdrop-filter: blur(14px);
+                    border: 1px solid rgba(0,246,255,0.3);
+                    box-shadow: 0 12px 36px rgba(0,246,255,0.25);">
+
+            <form method="post" action="{% url 'register' %}" class="form-signin">
+                {% csrf_token %}
+
+                <label for="username" class="my-3" style="color:#fff; font-weight:600;">
+                    Username:
+                </label><br>
+                <input type="text" name="username" placeholder="Enter your username" required>
+
+                <input type="submit" value="NEXT" class="btn" 
+                       style="background:#00F6FF; color:#040915; font-weight:600; margin-top:25px; width:100%; padding:10px 0; border-radius:10px;
+                              transition: all 0.2s;"
+                       onmouseover="this.style.background='#00cfff'; this.style.transform='translateY(-2px)';"
+                       onmouseout="this.style.background='#00F6FF'; this.style.transform='translateY(0)';"
+                >
+
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+input[type=text] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,246,255,0.3);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+input[type=text]::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+</style>
+
+{% endblock %}

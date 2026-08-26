@@ -1,0 +1,44 @@
+{% extends 'poll/base.html' %}
+{% block content %}
+
+<div style="max-width: 700px; margin: 60px auto; padding: 30px; 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(14px); 
+            border-radius: 18px; 
+            border: 1px solid rgba(0,246,255,0.3);
+            box-shadow: 0 12px 36px rgba(0,246,255,0.25); 
+            color: #fff;">
+    
+    <h1 style="text-align: center; margin-bottom: 25px; color: #00F6FF; text-shadow: 0 0 8px #00F6FF;">
+        Signature Verification
+    </h1>
+
+    <p>Your ballot: <code style="background: rgba(0,246,255,0.1); padding:2px 6px; border-radius:4px;">{{ ballot }}</code></p>
+    <p>Generated signature: <code style="background: rgba(0,246,255,0.1); padding:2px 6px; border-radius:4px;">{{ signature }}</code></p>
+
+    <p style="margin-top: 15px; color: #2ecc71; font-weight: 600;">
+        {{ status }}
+    </p>
+
+    <form action="{% url 'seal' %}" method="POST" style="margin-top: 25px; text-align: center;">
+        {% csrf_token %}
+        <input name="ballot_input" type="hidden" value="{{ ballot }}">
+        <input name="vote_id" type="hidden" value="{{ id }}">
+        <button type="submit" style="
+                background-color: #00F6FF;
+                color: #040915;
+                font-weight: 600;
+                padding: 12px 28px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+                transition: all 0.2s;
+            " 
+            onmouseover="this.style.backgroundColor='#00cfff'; this.style.transform='translateY(-2px)';"
+            onmouseout="this.style.backgroundColor='#00F6FF'; this.style.transform='translateY(0)';">
+            Seal the Ballot
+        </button>
+    </form>
+</div>
+
+{% endblock %}

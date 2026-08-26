@@ -1,0 +1,67 @@
+{% extends 'poll/base.html' %}
+{% block content %}
+
+<div class="text-center mb-4">
+    <div style="
+        background: rgba(0,246,255,0.05);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 20px 30px;
+        display: inline-block;
+        border: 1px solid rgba(0,246,255,0.3);
+        box-shadow: 0 8px 24px rgba(0,246,255,0.25);
+        color: #00F6FF;">
+        <h4>All votes have been verified successfully!</h4>
+    </div>
+</div>
+
+<div style="
+    overflow-x:auto;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(14px);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(0,246,255,0.3);
+    box-shadow: 0 12px 36px rgba(0,246,255,0.25);
+    ">
+    <table class="table table-hover text-center mb-0">
+        <thead style="color:#00F6FF; border-bottom:2px solid rgba(0,246,255,0.4);">
+            <tr>
+                <th scope="col">Candidate ID</th>
+                <th scope="col">Candidate Name</th>
+                <th scope="col">Candidate Age</th>
+                <th scope="col">Candidate Party</th>
+                <th scope="col">Number of Votes</th>
+            </tr>
+        </thead>
+        {% if candidates %}
+        <tbody>
+        {% for candidate in candidates %}
+            <tr style="
+                {% if candidate == winner %} 
+                    background: rgba(46, 204, 113, 0.8); 
+                    color: #fff; 
+                    font-weight: 600;
+                    box-shadow: 0 4px 18px rgba(46, 204, 113,0.6);
+                {% else %}
+                    color: #fff;
+                {% endif %}">
+                <th scope="row">{{ candidate.candidateID }}</th>
+                <td>{{ candidate.name }}</td>
+                <td>{{ candidate.age }}</td>
+                <td>{{ candidate.party }}</td>
+                <td>{{ candidate.count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <td colspan="5" style="color: rgba(255,255,255,0.6);">No candidates yet</td>
+            </tr>
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,181 @@
+{% extends 'poll/base.html' %}
+{% block title %}Home — E-BALLOT{% endblock %}
+
+{% block content %}
+
+<style>
+.hero-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0;
+  flex-wrap: wrap;
+}
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #00F6FF; /* accent color */
+  line-height: 1.2;
+  text-shadow: 0 0 12px #00F6FF;
+}
+.hero-text p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  margin-top: 12px;
+  max-width: 520px;
+}
+.hero-img img {
+  max-width: 100%;
+  width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 36px rgba(0, 246, 255, 0.45);
+}
+
+/* Section titles */
+.section-title {
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #00F6FF;
+  text-shadow: 0 0 6px #00F6FF;
+}
+
+/* Glass cards */
+.icon-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.icon-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,246,255,0.6);
+}
+.icon-card i {
+  font-size: 32px;
+  color: #00F6FF;
+  margin-bottom: 8px;
+}
+.icon-card h6 {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.feature-list li {
+  margin: 6px 0;
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Buttons */
+.btn-accent {
+  background-color: #00F6FF !important;
+  border: none;
+  color: #040915 !important;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.btn-accent:hover {
+  background-color: #00cfff !important;
+  transform: translateY(-2px);
+}
+.btn-outline-dark {
+  border-color: #00F6FF !important;
+  color: #00F6FF !important;
+}
+.btn-outline-dark:hover {
+  background-color: #00F6FF !important;
+  color: #040915 !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero-home {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-img img {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero-home">
+  <div class="hero-text" data-aos="fade-right">
+    <h1>Digital Voting, Secure & Transparent</h1>
+    <p>
+      E-BALLOT brings together cryptographic security, verified identity and full audit trails — building trust in every vote.
+    </p>
+    <div class="mt-4 d-flex gap-3 flex-wrap justify-content-center">
+      <a href="{% url 'register' %}" class="btn btn-accent px-4 py-2">Register to Vote</a>
+      <a href="{% url 'login' %}" class="btn btn-outline-dark px-4 py-2">Cast Your Vote</a>
+    </div>
+  </div>
+  
+</section>
+
+<hr class="my-5" style="border-color: rgba(0,255,255,0.3);">
+
+<!-- FEATURES -->
+<section data-aos="fade-up">
+  <h3 class="section-title text-center">Why E-BALLOT?</h3>
+  <p class="text-center text-muted mb-4" style="color: rgba(255,255,255,0.6)">Secure. Verified. Transparent.</p>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="icon-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h6>End-to-End Security</h6>
+        <p>Ballots are encrypted and immutable once cast.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="icon-card">
+        <i class="fa-solid fa-fingerprint"></i>
+        <h6>Verified Identity</h6>
+        <p>Only authenticated users can participate in elections.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="icon-card">
+        <i class="fa-solid fa-chart-simple"></i>
+        <h6>Instant Results & Audit</h6>
+        <p>Real-time tallying with full transparency & logs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="my-5" style="border-color: rgba(0,255,255,0.3);">
+
+<!-- VOTING SCHEDULE -->
+<section class="text-center" data-aos="fade-up">
+  <h5 class="fw-bold section-title">Voting Window</h5>
+  {% if error %}
+    <p style="color: rgba(255,255,255,0.6)">Voting has not started yet.</p>
+  {% else %}
+    <p class="fw-semibold">{{ start }} → {{ end }}</p>
+  {% endif %}
+</section>
+
+<hr class="my-5" style="border-color: rgba(0,255,255,0.3);">
+
+<!-- COMPLIANCE & TRANSPARENCY -->
+<section data-aos="fade-up">
+  <h3 class="section-title">Compliance & Transparency</h3>
+  <ul class="feature-list">
+    <li>Encrypted data storage with end-user privacy</li>
+    <li>Audit logs with blockchain-style hash verification</li>
+    <li>Anonymous ballot transport + strict identity separation</li>
+    <li>Compliant with global electoral data protection standards</li>
+  </ul>
+</section>
+
+{% endblock %}

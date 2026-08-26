@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}E-BALLOT | Secure Voting{% endblock %}</title>
+
+  <!-- CSS Libraries -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Particle BG -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
+
+  <style>
+    :root {
+      --accent:#00F6FF;
+      --bg:#040915;
+      --blur:14px;
+      --glass:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.10);
+    }
+
+    body {
+      margin:0;
+      padding:0;
+      font-family:"Inter",sans-serif;
+      background:var(--bg);
+      color:white;
+      overflow-x:hidden;
+      cursor:none; /* Hide default cursor for custom cursor */
+    }
+
+    /* Background Image */
+    #bg-image {
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:url('file:///C:/Users/Asus/Pictures/wallpaper/Z-Vote-9/Z-Vote-9/Z-Vote/poll/templates/poll/hand.jpg') center/cover no-repeat;
+      filter:brightness(.25);
+    }
+
+    /* Particles */
+    #particles-js {
+      position:fixed;
+      inset:0;
+      z-index:-1;
+    }
+
+    /* Navbar */
+    nav.navbar {
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      transition:.4s;
+      z-index:1000;
+    }
+    .navbar.scrolled {
+      background:rgba(0,0,0,0.85);
+      box-shadow:0 10px 40px rgba(0,0,0,.6);
+    }
+    .nav-link {
+      color: #fff !important;
+      transition:0.2s;
+    }
+    .nav-link:hover {
+      color:var(--accent)!important;
+      text-shadow:0 0 8px var(--accent);
+      transform:translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      padding:9rem 1rem 4rem;
+      min-height:45vh;
+      text-align:center;
+    }
+    .hero h1 {
+      font-size:clamp(38px,6vw,78px);
+      font-weight:900;
+      letter-spacing:1.2px;
+      text-shadow:0 0 18px var(--accent);
+    }
+    .hero p {
+      font-size:1.2rem;
+      color: rgba(255,255,255,0.85);
+      margin-top:12px;
+    }
+
+    /* Content container */
+    .site-container {
+      width:95%;
+      max-width:1150px;
+      margin:-30px auto 60px;
+      padding:40px 30px;
+      border-radius:24px;
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(var(--blur));
+      box-shadow:0 28px 80px rgba(0,0,0,.55);
+    }
+
+    footer {
+      text-align:center;
+      padding:1.2rem;
+      opacity:.8;
+      font-size:.9rem;
+    }
+
+    /* Custom cursor */
+    #cursor, #cursor-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2000;
+      transition: transform 0.1s ease;
+    }
+
+    #cursor {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+    }
+
+    #cursor-follower {
+      width: 35px;
+      height: 35px;
+      border: 2px solid var(--accent);
+      opacity: 0.6;
+      transition: transform 0.15s ease;
+    }
+
+    /* Responsive adjustments */
+    @media(max-width:768px) {
+      .hero {
+        padding:7rem 1rem 3rem;
+      }
+      .site-container {
+        margin: 20px auto 40px;
+        padding:30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div id="bg-image"></div>
+  <div id="particles-js"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top px-3">
+    <a class="navbar-brand text-light fw-bold" href="/">
+      <i class="fa-solid fa-shield-halved me-2"></i>E-BALLOT
+    </a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navLinks">
+      <i class="fa-solid fa-bars text-light"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navLinks">
+      <ul class="navbar-nav gap-2">
+        <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+        <li><a class="nav-link" href="{% url 'login' %}">Vote</a></li>
+        <li><a class="nav-link" href="{% url 'verify' %}">Verify</a></li>
+        <li><a class="nav-link" href="{% url 'result' %}">Results</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" data-aos="zoom-in">
+    <h1>E-BALLOT</h1>
+    <p class="lead mt-2">Next-Gen Secured Digital Voting System</p>
+  </section>
+
+  <!-- Dynamic Page Content -->
+  <main class="site-container" data-aos="fade-up">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>© 2025 E-BALLOT — Secure the Future of Voting</footer>
+
+  <!-- Custom Mouse Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true });
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      document.querySelector(".navbar")
+        .classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Particles
+    particlesJS("particles-js", {
+      particles: {
+        number:{ value:60 },
+        size:{ value:3 },
+        move:{ speed:1.1 },
+        line_linked:{ enable:true, opacity:.25 },
+        color:{ value:"#00f6ff" }
+      }
+    });
+
+    // Custom Cursor
+    const cursor = document.getElementById("cursor");
+    const follower = document.getElementById("cursor-follower");
+    document.addEventListener("mousemove", e => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'poll/base.html' %}
+
+{% block content %}
+<section class="notFound" style="height: 100vh; display:flex; justify-content:center; align-items:center; flex-direction:column;">
+    <div class="img mb-4">
+        <img src="https://assets.codepen.io/5647096/backToTheHomepage.png" alt="Back to the Homepage" style="max-width:200px;">
+        <img src="https://assets.codepen.io/5647096/Delorean.png" alt="Delorean" style="max-width:250px; margin-top:20px;">
+    </div>
+
+    <div class="text" style="text-align:center;">
+        <h1 style="color:red; font-size:100px; margin-bottom:20px;">404</h1>
+        <h2 style="font-size:40px; margin-bottom:20px;">PAGE NOT FOUND</h2>
+        <h3 style="font-size:25px; margin-bottom:30px;">BACK TO HOME?</h3>
+        <a href="/" class="btn btn-accent me-2" style="padding:10px 20px; font-weight:600;">YES</a>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-outline-light" style="padding:10px 20px; font-weight:600;">NO</a>
+    </div>
+</section>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    section.notFound { font-family: 'Press Start 2P', monospace; }
+    section.notFound a:hover { text-decoration:none; transform:scale(1.05); transition:0.2s; }
+    @media only screen and (max-width:768px){
+        section.notFound h1 { font-size:50px; }
+        section.notFound h2 { font-size:25px; }
+        .img img { max-width:70vw; margin-bottom:15px; }
+    }
+</style>
+{% endblock %}

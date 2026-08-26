@@ -1,0 +1,75 @@
+{% extends 'poll/base.html' %}
+{% block content %}
+
+<div class="text-center" style="padding-top: 60px; padding-bottom: 60px;">
+
+    <!-- Error Card -->
+    <div style="
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(14px);
+        border-radius: 18px;
+        padding: 40px 30px;
+        max-width: 650px;
+        margin: auto;
+        border: 1px solid rgba(0,246,255,0.3);
+        box-shadow: 0 12px 36px rgba(0,246,255,0.3);
+        color: white;">
+        
+        <i class="fa-solid fa-circle-xmark" style="font-size: 80px; color: #ff4d6d;"></i>
+
+        <h2 style="margin-top: 20px; font-weight: 700; color: #00F6FF;">
+            Oops! Something Went Wrong
+        </h2>
+
+        <p style="opacity: 0.8; font-size: 18px; margin-top: 12px;">
+            {{ fail }}
+        </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="margin-top: 40px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+        
+        <button onclick="location.href='/'"
+            class="btn"
+            style="
+                background: #00F6FF;
+                padding: 12px 30px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #040915;
+                border-radius: 10px;
+                transition: 0.25s;">
+            <i class="fa-solid fa-house"></i> Home
+        </button>
+
+        <button onclick="location.href='/register'"
+            class="btn"
+            style="
+                border: 2px solid #00F6FF;
+                padding: 12px 30px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #00F6FF;
+                background: transparent;
+                border-radius: 10px;
+                transition: 0.25s;">
+            <i class="fa-solid fa-user-plus"></i> Register
+        </button>
+
+        <button onclick="location.href='/login'"
+            class="btn"
+            style="
+                background: rgba(40,52,68,0.8);
+                padding: 12px 30px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #fff;
+                border-radius: 10px;
+                transition: 0.25s;">
+            <i class="fa-solid fa-right-to-bracket"></i> Try Again
+        </button>
+
+    </div>
+</div>
+
+{% endblock content %}

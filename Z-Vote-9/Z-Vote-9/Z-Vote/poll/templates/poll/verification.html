@@ -1,0 +1,82 @@
+{% extends 'poll/base.html' %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 60px auto; padding: 30px; 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(14px); 
+            border-radius: 18px; 
+            border: 1px solid rgba(0,246,255,0.3);
+            box-shadow: 0 12px 36px rgba(0,246,255,0.25); 
+            color: #fff;">
+
+    {% if error %}
+        <div style="
+            background: rgba(255,0,0,0.1); 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: #ff4d6d; 
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;">
+            {{ verification }}
+        </div>
+    {% else %}
+        <div style="
+            background: rgba(0,246,255,0.1); 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: #00F6FF; 
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;">
+            {{ verification }}
+        </div>
+
+        <!-- Unique ID Form -->
+        <form action="/verify" method="post" style="margin-bottom: 30px;">
+            {% csrf_token %}
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" name="unique_id" placeholder="Enter Your Unique ID"
+                    style="flex:1; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(0,246,255,0.3); background: rgba(255,255,255,0.05); color: #fff;"
+                />
+                <input type="submit" value="Find" 
+                    style="background: #00F6FF; color: #040915; font-weight:600; border:none; border-radius: 8px; padding: 10px 20px; cursor:pointer;
+                           transition: all 0.2s;"
+                    onmouseover="this.style.background='#00cfff'; this.style.transform='translateY(-2px)';"
+                    onmouseout="this.style.background='#00F6FF'; this.style.transform='translateY(0)';"
+                />
+            </div>
+        </form>
+
+        <!-- Votes Table -->
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse: collapse;">
+                <thead style="color:#00F6FF; border-bottom: 2px solid rgba(0,246,255,0.4);">
+                    <tr>
+                        <th style="padding:12px; text-align:center;">Unique ID</th>
+                        <th style="padding:12px; text-align:center;">Candidate ID</th>
+                        <th style="padding:12px; text-align:center;">Timestamp</th>
+                        <th style="padding:12px; text-align:center;">Block ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vote in votes %}
+                    <tr style="text-align:center; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td>{{ vote.id }}</td>
+                        <td>{{ vote.vote }}</td>
+                        <td>{{ vote.timestamp }}</td>
+                        <td>{{ vote.block_id }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% if votes|length == 0 %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; color: rgba(255,255,255,0.6);">No votes found.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
